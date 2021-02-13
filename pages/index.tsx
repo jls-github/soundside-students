@@ -1,6 +1,6 @@
-import Head from 'next/head'
+import Head from "next/head";
 
-export default function Home({newslettters}) {
+export default function Home(newsletters: { slug: string; title: string }[]) {
   return (
     <div>
       <Head>
@@ -10,17 +10,13 @@ export default function Home({newslettters}) {
       <main>
         <h1>Soundside Students</h1>
         <p>Serving Jesus in the South Puget Sound</p>
-        <section>
-          Newsletters
-        </section>
-        <section>
-          Upcoming Events
-        </section>
+        <section>Newsletters</section>
+        <section>Upcoming Events</section>
       </main>
     </div>
-  )
+  );
 }
 
 export const getStaticProps = async () => {
-  const newsletters = []
-}
+  const newsletters: { slug: string; title: string }[] = [];
+};
