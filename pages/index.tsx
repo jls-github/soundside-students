@@ -20,14 +20,15 @@ export default function Home({newsletters}: Props) {
           {newsletters.map((newsletter) => newsletter.title)}
         </section>
 
-        <section>Upcoming Events</section>
+        <section>
+          <h3>Upcoming Events</h3>
+        </section>
       </main>
     </div>
   );
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const newsletters = getNewsletters();
-  console.log(newsletters)
+  const newsletters = getNewsletters(['slug', 'title']);
   return { props: { newsletters } };
 };
