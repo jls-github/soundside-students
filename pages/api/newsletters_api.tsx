@@ -6,23 +6,23 @@ export {};
 
 const newslettersDirectory: string = join(process.cwd(), "_newsletters");
 
-const _getNewsletterPaths = (): string[] => {
+export const getNewsletterSlugs = (): string[] => {
   return fs.readdirSync(newslettersDirectory);
 };
 
-const _getNewsletterByPath = (
-  path: string,
+export const getNewsletterBySlug = (
+  slug: string,
   fields: string[] = []
 ): Record<string, any> => {
   const fileContents = fs.readFileSync(
-    `${newslettersDirectory}/${path}`,
+    `${newslettersDirectory}/${slug}`,
     "utf8"
   );
   const { content, data } = matter(fileContents);
   const newsletter: Record<string, any> = {};
   fields.forEach((field) => {
     if (field === "slug") {
-      newsletter[field] = path.replace(/\.md$/, "");
+      newsletter[field] = slug.replace(/\.md$/, "");
     } else if (field === "content") {
       newsletter[field] = content;
     }
@@ -37,7 +37,7 @@ const _getNewsletterByPath = (
 export const getNewsletters = (
   fields: string[] = []
 ): Record<string, any>[] => {
-  const paths = _getNewsletterPaths();
-  const newsletters = paths.map((path) => _getNewsletterByPath(path, fields));
+  const slugs = getNewsletterSlugs();
+  const newsletters = slugs.map((slug) => getNewsletterBySlug(slug, fields));
   return newsletters;
 };
