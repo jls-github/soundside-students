@@ -5,6 +5,7 @@ import { getNewsletters } from "./api/newsletters_api";
 type Props = {
   newsletters: { slug: string; title: string }[];
 };
+
 export default function Home({ newsletters }: Props) {
   return (
     <div>
