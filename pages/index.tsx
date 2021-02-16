@@ -3,9 +3,9 @@ import Head from "next/head";
 import { getNewsletters } from "./api/newsletters_api";
 
 type Props = {
-  newsletters: {slug: string, title: string}[]
-}
-export default function Home({newsletters}: Props) {
+  newsletters: { slug: string; title: string }[];
+};
+export default function Home({ newsletters }: Props) {
   return (
     <div>
       <Head>
@@ -17,9 +17,9 @@ export default function Home({newsletters}: Props) {
         <p>Serving Jesus in the South Puget Sound</p>
         <section>
           <h3>Newsletters</h3>
-          {newsletters.map((newsletter) => 
-          <a href={`/newsletters/${newsletter.slug}`}>{newsletter.title}</a>
-          )}
+          {newsletters.map((newsletter) => (
+            <a href={`/newsletters/${newsletter.slug}`}>{newsletter.title}</a>
+          ))}
         </section>
 
         <section>
@@ -31,6 +31,6 @@ export default function Home({newsletters}: Props) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const newsletters = getNewsletters(['slug', 'title']);
+  const newsletters = getNewsletters(["slug", "title"]);
   return { props: { newsletters } };
 };
