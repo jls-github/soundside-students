@@ -17,7 +17,9 @@ export default function Home({newsletters}: Props) {
         <p>Serving Jesus in the South Puget Sound</p>
         <section>
           <h3>Newsletters</h3>
-          {newsletters.map((newsletter) => newsletter.title)}
+          {newsletters.map((newsletter) => 
+          <a href={`/newsletters/${newsletter.slug}`}>{newsletter.title}</a>
+          )}
         </section>
 
         <section>

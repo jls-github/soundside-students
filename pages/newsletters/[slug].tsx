@@ -14,10 +14,11 @@ const Newsletter = ({ newsletter, errors }: Props) => {
     return <p>{errors}</p>;
   }
   const { title, content, slug } = newsletter;
+  console.log(slug)
   return (
     <div>
       <h3>{title}</h3>
-      <p>{slug}</p>
+      <p>{content}</p>
     </div>
   );
 };
@@ -34,7 +35,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   try {
     const slug = params?.slug;
-    const newsletter = await getNewsletterBySlug(String(slug), [
+    const newsletter = getNewsletterBySlug(String(slug), [
       "title",
       "content",
       "slug",

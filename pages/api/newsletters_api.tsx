@@ -7,7 +7,9 @@ export {};
 const newslettersDirectory: string = join(process.cwd(), "_newsletters");
 
 export const getNewsletterSlugs = (): string[] => {
-  return fs.readdirSync(newslettersDirectory);
+  return fs.readdirSync(newslettersDirectory).map((slug) => {
+    return slug.replace(/\.md$/, "")
+  });
 };
 
 export const getNewsletterBySlug = (
@@ -15,14 +17,14 @@ export const getNewsletterBySlug = (
   fields: string[] = []
 ): Record<string, any> => {
   const fileContents = fs.readFileSync(
-    `${newslettersDirectory}/${slug}`,
+    `${newslettersDirectory}/${slug}.md`,
     "utf8"
   );
   const { content, data } = matter(fileContents);
   const newsletter: Record<string, any> = {};
   fields.forEach((field) => {
     if (field === "slug") {
-      newsletter[field] = slug.replace(/\.md$/, "");
+      newsletter[field] = slug;
     } else if (field === "content") {
       newsletter[field] = content;
     }
